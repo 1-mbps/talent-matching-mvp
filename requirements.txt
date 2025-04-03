@@ -1,0 +1,9 @@
+pydantic
+fastapi
+uvicorn
+passlib
+bcrypt
+supabase
+jwt
+PyPDF2
+qdrant-client
