@@ -1,11 +1,12 @@
 pydantic
-fastapi
+fastapi[standard]
 uvicorn
 passlib
 bcrypt
-supabase
-jwt
 PyPDF2
 qdrant-client
 fastembed
 ranx
+supabase
+pyjwt
+openai

@@ -1,9 +1,9 @@
 from pydantic import BaseModel
 from typing import Literal
 from fastapi import APIRouter, HTTPException
-import os
+from uuid import uuid4
 from utils.auth import get_password_hash, supabase
-from utils.env import env
+# from utils.env import env
 
 router = APIRouter()
 
@@ -28,7 +28,8 @@ async def register(request: RegisterRequest):
         "user_type": request.user_type,
         "city": request.city,
         "country": request.country,
-        "created_at": "now()"
+        "created_at": "now()",
+        "uuid": str(uuid4())
     }
     
     # Insert user into Supabase
