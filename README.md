@@ -36,7 +36,7 @@ This is an overview of each:
 
 2. The job description is also converted into those two embedding types.
 
-3. Compute the cosine similarity of each resume embedding to its corresponding embedding on the job description. Then, combine the two scores using reciprocal-rank fusion.
+3. Compute the cosine similarity of the resume embeddings to their corresponding embeddings on the job description. Then, combine the two scores using reciprocal-rank fusion. (This uses a Qdrant vector database)
 
 4. Return the 7 highest-scoring resumes.
 
