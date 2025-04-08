@@ -36,9 +36,9 @@ class Job(BaseModel):
     job_title: str
 
     def __init__(self, **kwargs):
-        if not kwargs.get("rating_schema_weights"):
-            kwargs["rating_schema_weights"] = {key: 1.0 for key in self.rating_schema["properties"].keys()}
         super().__init__(**kwargs)
+        if not kwargs.get("rating_schema_weights"):
+            self.rating_schema_weights = {key: 1.0 for key in self.rating_schema["properties"].keys()}
 
     @classmethod
     def init_job(cls, rating_schema: str | dict, rating_schema_weights: str | dict, **kwargs) -> 'Job':
@@ -49,10 +49,11 @@ class Job(BaseModel):
         )
     
 class CandidateMatch(BaseModel):
+    job_id: str
     resume: str
     score: float
     name: str
-    ratings: dict
+    ratings: dict[str, float]
 
     def __lt__(self, other: 'CandidateMatch') -> bool:
         return self.score < other.score

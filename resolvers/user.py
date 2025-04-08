@@ -38,8 +38,12 @@ async def upload(current_user: Annotated[User, Depends(get_current_user)], file:
             page = pdf_reader.pages[page_num]
             text_content += page.extract_text()
 
+        # Create two embeddings for the resume:
+        # BM42: good balance of keyword matching and semantic meaning
+        # Jina: good at semantic meaning, but not as good at keyword matching
         vec = build_qdrant_vector(text_content)
 
+        # Insert resume into vector database
         vector_client.upsert(collection_name="talent-pool", points=[
             PointStruct(id=current_user.uuid, vector=vec, payload={"resume": text_content, "name": current_user.name}
         )])

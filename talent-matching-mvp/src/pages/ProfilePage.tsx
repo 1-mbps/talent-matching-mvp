@@ -34,6 +34,11 @@ const ProfilePage: React.FC = () => {
     return <Navigate to="/login" />;
   }
 
+  // Redirect business users to business profile
+  if (!isLoading && user?.user_type === 'business') {
+    return <Navigate to="/business-profile" />;
+  }
+
   // Show loading state
   if (isLoading || !user) {
     return (
@@ -113,8 +118,8 @@ const ProfilePage: React.FC = () => {
                   </Heading>
                   
                   <HStack>
-                    <Badge colorScheme={user.user_type === 'business' ? 'purple' : 'green'} fontSize="md" px={2} py={1}>
-                      {user.user_type === 'business' ? 'Business' : 'Job Seeker'}
+                    <Badge colorScheme="green" fontSize="md" px={2} py={1}>
+                      Job Seeker
                     </Badge>
                   </HStack>
                   
@@ -130,66 +135,42 @@ const ProfilePage: React.FC = () => {
             </CardBody>
           </Card>
 
-          {user.user_type === 'user' && (
-            <Card bg={cardBgColor} borderRadius="lg" boxShadow="md">
-              <CardBody>
-                <VStack align="stretch" spacing={4}>
-                  <Heading as="h3" size="md">
-                    Resume Management
-                  </Heading>
-                  
-                  <Divider />
-                  
-                  <Flex direction={{ base: 'column', sm: 'row' }} gap={4} align="center">
-                    <Button
-                      as="label"
-                      htmlFor="resume-upload"
-                      colorScheme="blue"
-                      isLoading={isUploading}
-                      loadingText="Uploading..."
-                      cursor="pointer"
-                    >
-                      Upload Resume (PDF)
-                      <input
-                        id="resume-upload"
-                        type="file"
-                        accept=".pdf"
-                        style={{ display: 'none' }}
-                        onChange={handleFileUpload}
-                        disabled={isUploading}
-                      />
-                    </Button>
-                    
-                    <Text fontSize="sm" color="gray.500">
-                      Upload your resume to be matched with potential employers
-                    </Text>
-                  </Flex>
-                </VStack>
-              </CardBody>
-            </Card>
-          )}
-
-          {user.user_type === 'business' && (
-            <Card bg={cardBgColor} borderRadius="lg" boxShadow="md">
-              <CardBody>
-                <VStack align="stretch" spacing={4}>
-                  <Heading as="h3" size="md">
-                    Business Dashboard
-                  </Heading>
-                  
-                  <Divider />
-                  
-                  <Text>
-                    Welcome to your business dashboard. Here you can manage your job postings and view matched candidates.
-                  </Text>
-                  
-                  <Button colorScheme="blue">
-                    Create Job Posting
+          <Card bg={cardBgColor} borderRadius="lg" boxShadow="md">
+            <CardBody>
+              <VStack align="stretch" spacing={4}>
+                <Heading as="h3" size="md">
+                  Resume Management
+                </Heading>
+                
+                <Divider />
+                
+                <Flex direction={{ base: 'column', sm: 'row' }} gap={4} align="center">
+                  <Button
+                    as="label"
+                    htmlFor="resume-upload"
+                    colorScheme="blue"
+                    isLoading={isUploading}
+                    loadingText="Uploading..."
+                    cursor="pointer"
+                  >
+                    Upload Resume (PDF)
+                    <input
+                      id="resume-upload"
+                      type="file"
+                      accept=".pdf"
+                      style={{ display: 'none' }}
+                      onChange={handleFileUpload}
+                      disabled={isUploading}
+                    />
                   </Button>
-                </VStack>
-              </CardBody>
-            </Card>
-          )}
+                  
+                  <Text fontSize="sm" color="gray.500">
+                    Upload your resume to be matched with potential employers
+                  </Text>
+                </Flex>
+              </VStack>
+            </CardBody>
+          </Card>
         </VStack>
       </Container>
     </Box>

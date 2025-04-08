@@ -114,7 +114,7 @@ const RegisterPage: React.FC = () => {
             <FormControl isInvalid={!!errors.email} isRequired>
               <FormLabel>Email</FormLabel>
               <Input
-                name="email"
+                name="username"
                 type="email"
                 value={formData.username}
                 onChange={handleChange}

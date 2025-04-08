@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
+import BusinessProfilePage from './pages/BusinessProfilePage';
 
 // Components
 import Navbar from './components/Navbar';
@@ -23,6 +24,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/business-profile" element={<BusinessProfilePage />} />
           </Routes>
         </Router>
       </AuthProvider>
